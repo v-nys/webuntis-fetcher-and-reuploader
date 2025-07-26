@@ -19,6 +19,10 @@
       pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
     in
     {
+      # don't need to specify dependency on libsecret,... here
+      # these things are started by subprocess.run
+      # and that runs as normal user
+      # so normal user needs to have the software installed, that's it
       packages = forAllSystems (
         system:
         let

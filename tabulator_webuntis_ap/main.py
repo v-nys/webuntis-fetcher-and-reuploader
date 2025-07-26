@@ -131,6 +131,11 @@ def tabulate():
         capture_output=True,
         encoding="utf8",
     ).stdout
+    ip = subprocess.run(
+        ["secret-tool", "lookup", "IP", "Hetzner"],
+        capture_output=True,
+        encoding="utf8",
+    ).stdout
     with webuntis.Session(
         server="arche.webuntis.com",
         username=username,
@@ -140,6 +145,21 @@ def tabulate():
     ).login() as s:
         for klasse in s.klassen():
             print(klasse.name)
+    copy_result = subprocess.run(
+        [
+            "scp",
+            "-i",
+            # TODO: will want to avoid referencing this in absolute terms
+            "/home/vincentn/.ssh/id_rsa",
+            # just to see if file shows up there
+            "/home/vincentn/.dotfiles/nvim.nix",
+            f"root@{ip}:/root/nvim.nix",
+        ],
+        capture_output=True,
+        encoding="utf8",
+    )
+    print(copy_result.stdout)
+    print(copy_result.stderr)
 
 
 if __name__ == "__main__":
