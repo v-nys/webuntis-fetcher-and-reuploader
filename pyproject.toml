@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "tabulator-webuntis-ap"
+version = "0.6.0"
+description = ""
+authors = ["Vincent Nys <vincent.nys@ap.be>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+webuntis = "^0.1.12"
+click = "^8.1.3"
+PyYAML = "^6.0"
+
+[tool.poetry.scripts]
+tabulator-webuntis-ap = "tabulator_webuntis_ap.main:tabulate"
+
+[build-system]
+requires = ["poetry-core", "setuptools"]
+build-backend = "poetry.core.masonry.api"
