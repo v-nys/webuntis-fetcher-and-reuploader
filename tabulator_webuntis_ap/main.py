@@ -10,12 +10,7 @@ from getpass import getpass
 import click  # type: ignore
 import yaml  # type: ignore
 
-logging.basicConfig(
-    filename="tabulator-webuntis.log",
-    encoding="utf-8",
-    level=logging.WARNING,
-    filemode="w",
-)
+logging.basicConfig(level=logging.WARNING)
 
 
 def _monday_preceding(date):
