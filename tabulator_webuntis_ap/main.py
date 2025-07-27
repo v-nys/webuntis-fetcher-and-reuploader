@@ -68,7 +68,7 @@ def tabulate():
         useragent="WebUntis Test",
     ).login() as session:
         CLOUDSYSTEMEN = 50592
-        TEST_GROUPS = ["1PRO_D1", "1PRO_D2"]
+        TEST_GROUPS = ["1PRO_D1"]
         [webuntis_subject] = session.subjects().filter(id=[CLOUDSYSTEMEN])
         time_table = session.timetable(
             subject=webuntis_subject,
@@ -87,8 +87,10 @@ def tabulate():
                 klas_names = [klas.name for klas in period.klassen]
                 for klas in klas_names:
                     if klas in TEST_GROUPS:
+                        # NOTE: if there was more than one group in TEST_GROUPS
+                        # an additional column for the group would be needed
                         fp.write(
-                            f"{klas};{period.start.isoformat()};{period.end.isoformat()}\n"
+                            f"{period.start.isoformat()};{period.end.isoformat()}\n"
                         )
             fp.close()
             _copy_result = subprocess.run(
